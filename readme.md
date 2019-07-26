@@ -7,6 +7,7 @@ Dashboard to display Wifi data about devices in a vicinity by capturing probe re
 Retail stores need as much information as they can about their customers to stay competitive. Since smartphones are ubiquitous, valuable insights can be gained from information broadcasted by the smartphones of customers without invading their privacy(by capturing probe requests). This project guides you on how to set up wifi routers to capture data and delivers a dashboard to visualize insights from that data.
 
 ## Screenshots
+![screenshot](dashboard.png "Dashboard")
 
 ## Tech/frameworks used
 
