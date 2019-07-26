@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <script src="{{ url_for('static', filename='draw.js') }}"></script>
+    <script src="{{ url_for('static', filename='fetch.js') }}"></script>
+    <script src="{{ url_for('static', filename='Chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css' ) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css' ) }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-tCompatible" content="ie=edge">
+    <title>Dashboard</title>
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> -->
+</head>
+<body>
+    <div class = "grid-container">
+
+       
+    <aside class="sidenav">
+    <div  class = "sidemenu">
+        <nav>
+        <ul class="list">
+           <li class="Menu">MENU</li>
+           <li class="active"><a href="#" class="list-item">Dashboard</a></li>
+           <!--<li><a href="#" class="list-item">Help</a></li>--> 
+           <!-- <li><a href="#" class="list-item">Developers</a></li>  -->
+        </ul>
+        </nav>
+    </div>
+</aside>
+
+<div class="_main">
+
+<div class="navbar header">
+    Dashboard
+    <div class="dropdown">
+        <select name="devices" id="devices">
+            {% for device in devices %}
+            <option value="{{ device }}">{{ device }}</option>
+            {% endfor %}
+        </select> 
+    </div> 
+  </div>
+
+    
+    <div class="flex-container">
+  
+        <div>
+            <h4 class="title">Unique MAC addresses detected per day</h4>
+            <div class="option box1">
+                <label for="mac_start">Start:</label>
+                <input type="date" id="mac_start">
+                <label for="mac_end">End:</label>
+                <input type="date" id="mac_end">
+                <button  class="but" id="mac"> <!--<i class='fas'>&#xf01e;</i>--> <img src="{{ url_for('static', filename='reload.png' ) }}" width=20 height=20></button>
+            </div> 
+            <div class="content"><div class="myChart" id="chart"></div></div>
+        </div>
+        
+        
+
+        <div>
+            <h4 class="title">Number of repeated MAC addresses</h4>
+            <div class="option box2">
+                <label for="rep_start">Start:</label>
+                <input type="date" id="rep_start">
+                <label for="rep_end">End:</label>
+                <input type="date" id="rep_end">
+                <input type="text" id="offset" value="Days" size=3>
+                <button class = "but" id="num_repeats"><!-- <i class='fas'>&#xf01e;</i>--> <img src="{{ url_for('static', filename='reload.png' ) }}" width=20 height=20></button>
+            </div>
+            <div class="content"><div class="myChart3" id="chart"></div></div>
+          </div>
+
+        <div> 
+          <h4 class="title">Number of unique MAC addresses (last five hours)</h4>
+          <div class="option box3"><button class = "but" id="mac_today"> <!--<i class='fas'>&#xf01e;</i>--> <img src="{{ url_for('static', filename='reload.png' ) }}" width=20 height=20></button></div>
+          <div class="content"><div class="myChart2" id="chart"></div></div>
+        </div>
+
+        <div>
+          <h4 class="title">Mac lookup - Historical Data</h4>
+          <div class="option box4">
+              <label for="mac_text">Mac Address:</label>
+              <input type="text" id="mac_text" value="MAC Address" size=10>
+              <button class = "but" id="mac_lookup"> <!--<i class='fas'>&#xf01e;</i> --><img src="{{ url_for('static', filename='reload.png' ) }}" width=20 height=20></button>
+          </div>
+          <div class="content"><div class="myChart4"></div></div>
+        </div>
+        <div>
+            <h4 class="title">MAC lookup - Current day</h4>
+            <div class="option box1"></div> 
+            <div class="content"><div id="mac_data"></div></div>
+        </div>
+        </div>
+
+    </ul>
+    </div>
+</div>
+</div>
+
+<script>
+    document.getElementById("mac").addEventListener('click', function(){getUniqueMACS();});
+    document.getElementById("num_repeats").addEventListener('click', function(){getNumRepeats();});
+    document.getElementById("mac_today").addEventListener('click', function(){UniqueMACSToday();});
+    document.getElementById("mac_lookup").addEventListener('click', function(){macLookup();}); 
+</script>
+</body>
+</html>
